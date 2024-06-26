@@ -10,13 +10,12 @@ module Skynet
 
     raise_on [400, 401, 406, 422, 500]
 
-    def initialize(agent_session_id: nil, secret: ::Skynet.config.secret, iss: ::Skynet.config.app_id)
+    def initialize(secret: ::Skynet.config.secret, iss: ::Skynet.config.app_id)
       self.class.headers "Authorization" => "jwt #{jwt_token(secret:, iss:)}" if secret.present? && iss.present?
-      @agent_session_id = agent_session_id
     end
 
-    def agent_session
-      self.class.get("/agent_sessions/#{@agent_session_id}", {})["agent_session"]
+    def agent_session(agent_session_id)
+      self.class.get("/agent_sessions/#{agent_session_id}", {})["agent_session"]
     end
 
     def upload(file)
