@@ -18,23 +18,23 @@ module Skynet
     end
 
     def info(event, session_id: nil, info: {})
-      log(event, {session_id: session_id || @session_id, level: :info}.merge(info))
+      log(event, session_id: (session_id || @session_id), info: { level: :info }.merge(info))
     end
 
     def error(event, session_id: nil, info: {})
-      log(event, {session_id: session_id || @session_id, level: :error}.merge(info))
+      log(event, session_id: (session_id || @session_id), info: { level: :error}.merge(info))
     end
 
     def debug(event, session_id: nil, info: {})
-      log(event, {session_id: session_id || @session_id, level: :debug}.merge(info))
+      log(event, session_id: (session_id || @session_id), info: { level: :debug}.merge(info))
     end
 
     private
 
-    def log(event, info = {})
+    def log(event, session_id: nil, info: {})
       @logger.publish(event, {
         service: @stream_key,
-        session: @session_id,
+        session: session_id,
         agent_session_id: @agent_session_id,
         info: info
       })
