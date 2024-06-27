@@ -3,7 +3,7 @@ RSpec.describe Skynet::Client do
     Skynet.configure do |config|
       config.secret = "secret"
       config.app_id = "app_id"
-      config.base_uri= "https://www.skynet.com"
+      config.base_uri = "https://www.skynet.com"
     end
   end
 
@@ -38,7 +38,7 @@ RSpec.describe Skynet::Client do
       file_id = rand(9999)
       file = File.new("spec/fixtures/file.txt")
       stub_api = stub_request(:post, "https://www.skynet.com/uploads")
-        .to_return(status: 200, body: { file: { id: file_id }}.to_json)
+        .to_return(status: 200, body: {file: {id: file_id}}.to_json)
 
       response = described_class.new.upload(file)
 
