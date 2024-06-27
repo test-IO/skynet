@@ -5,13 +5,15 @@ module Skynet
     def initialize(agent_session_id, session_id: nil)
       @session_id = session_id
       @agent_session_id = agent_session_id
+      @logger = Skynet.config.logger || RedisStream.default_logger
+      @stream_key = Skynet.config.stream_key || RedisStream.config.stream_key
     end
 
     def start(session_id: nil)
       info("started", session_id: session_id)
     end
 
-    def finish
+    def finish(session_id: nil)
       info("finished", session_id: session_id)
     end
 
@@ -29,9 +31,9 @@ module Skynet
 
     private
 
-    def log(event, info: {})
-      RedisStream.default_logger.publish(event, {
-        service: RedisStream.config.stream_key,
+    def log(event, info = {})
+      @logger.publish(event, {
+        service: @stream_key,
         session: @session_id,
         agent_session_id: @agent_session_id,
         info: info
