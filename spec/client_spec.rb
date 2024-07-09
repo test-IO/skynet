@@ -43,7 +43,7 @@ RSpec.describe Skynet::Client do
       response = described_class.new.upload(file)
 
       expect(stub_api).to have_been_requested
-      expect(response["file"]["id"]).to eq(file_id)
+      expect(response["id"]).to eq(file_id)
     end
   end
 
