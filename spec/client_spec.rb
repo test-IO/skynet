@@ -28,8 +28,8 @@ RSpec.describe Skynet::Client do
       response = described_class.new.agent_session(agent_session_id)
 
       expect(stub_api).to have_been_requested
-      expect(response["id"]).to eq(agent_session_id)
-      expect(response["test_cycle"]["url"]).to eq("https://www.example.com")
+      expect(response["agent_session"]["id"]).to eq(agent_session_id)
+      expect(response["agent_session"]["test_cycle"]["url"]).to eq("https://www.example.com")
     end
   end
 
