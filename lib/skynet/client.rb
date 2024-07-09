@@ -30,7 +30,12 @@ module Skynet
       self.class.get("/uploads/#{uuid}")
     end
 
-    def jwt_token(secret:, iss:, exp: 4.hours.from_now.to_i)
+    def file_info(uuid)
+      self.class.get("/uploads/#{uuid}/info")["file"]
+    end
+
+    def jwt_token(secret:, iss:)
+      exp = (Time.now + 4 * 3600).to_i
       payload = {iss: iss, exp: exp}
       header_fields = {alg: "HS256"}
       ::JWT.encode payload, secret, "HS256", header_fields
