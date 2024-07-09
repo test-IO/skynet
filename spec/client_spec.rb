@@ -46,4 +46,19 @@ RSpec.describe Skynet::Client do
       expect(response["file"]["id"]).to eq(file_id)
     end
   end
+
+  describe "#file_info" do
+    it "returns file info" do
+      file_id = rand(9999)
+      response_api = { file: { id: file_id, filename: "test.html", content_type: "text/html", byte_size: 123, url: "http://localhost:5000/..." } }
+      stub_api = stub_request(:get, "https://www.skynet.com/uploads/#{file_id}/info")
+        .to_return(status: 200, body: response_api.to_json)
+
+      response = described_class.new.file_info(file_id)
+
+      expect(stub_api).to have_been_requested
+      expect(response["file"]["id"]).to eq(file_id)
+      expect(response["file"]["content_type"]).to eq("text/html")
+    end
+  end
 end
