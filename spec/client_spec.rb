@@ -43,7 +43,34 @@ RSpec.describe Skynet::Client do
       response = described_class.new.upload(file)
 
       expect(stub_api).to have_been_requested
-      expect(response["file"]["id"]).to eq(file_id)
+      expect(response["id"]).to eq(file_id)
+    end
+  end
+
+  describe "#file_info" do
+    let(:file_id) { SecureRandom.uuid }
+    let(:response_api) do
+      {
+        file: {
+          id: file_id,
+          name: "file.txt",
+          size: 1024,
+          mime_type: "text/plain",
+          url: "https://www.skynet.com/uploads/#{file_id}"
+        }
+      }
+    end
+
+    it "return the info of the file" do
+      stub_request(:get, "https://www.skynet.com/uploads/#{file_id}/info")
+        .to_return(status: 200, body: response_api.to_json)
+
+      response = described_class.new.file_info(file_id)
+      expect(response["id"]).to eq(file_id)
+      expect(response["name"]).to eq("file.txt")
+      expect(response["size"]).to eq(1024)
+      expect(response["mime_type"]).to eq("text/plain")
+      expect(response["url"]).to eq("https://www.skynet.com/uploads/#{file_id}")
     end
   end
 end
