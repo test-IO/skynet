@@ -19,7 +19,7 @@ module Skynet
     end
 
     def agent_session(agent_session_id)
-      self.class.get("/agent_sessions/#{agent_session_id}", {})["agent_session"]
+      self.class.get("/agent_sessions/#{agent_session_id}", {})
     end
 
     def upload(file)
