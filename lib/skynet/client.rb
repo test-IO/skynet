@@ -23,7 +23,7 @@ module Skynet
     end
 
     def upload(file)
-      self.class.post("/uploads", body: {file: file})
+      self.class.post("/uploads", body: {file: file})["file"]
     end
 
     def download(uuid)
