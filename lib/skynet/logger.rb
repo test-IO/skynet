@@ -2,6 +2,8 @@
 
 module Skynet
   class Logger
+    attr_reader :session_id, :agent_session_id
+
     def initialize(agent_session_id, session_id: nil)
       @session_id = session_id
       @agent_session_id = agent_session_id
