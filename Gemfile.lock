@@ -1,8 +1,8 @@
 GIT
   remote: https://github.com/test-IO/redis_stream
-  revision: 6c9727df62462843d444cd4d3263ea5fb7cd2dee
+  revision: 56f34bbb9127a5ce1559095d3327bfd49a780aed
   specs:
-    redis_stream (0.1.3)
+    redis_stream (0.1.4)
 
 PATH
   remote: .
