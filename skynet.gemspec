@@ -37,7 +37,7 @@ Gem::Specification.new do |spec|
   # spec.add_dependency "example-gem", "~> 1.0"
   spec.add_dependency "httparty", "~> 0.22.0"
   spec.add_dependency "jwt", "~> 2.8.0"
-  spec.add_dependency "redis_stream", "~> 0.1.3"
+  spec.add_dependency "redis_stream", "~> 0.2.0"
   spec.add_development_dependency "webmock", "~> 3.13.0"
 
   # For more information and examples about making a new gem, check out our
